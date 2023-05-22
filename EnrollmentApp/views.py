@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Korisnici
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Korisnici, Predmeti
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
@@ -79,3 +79,25 @@ def add_subject(request):
         'professors': Korisnici.objects.filter(role='profesor')
     }
     return render(request, 'add_subject.html', context)
+
+
+
+
+@login_required
+@user_passes_test(check_admin)
+def lista_predmeta(request):
+    predmeti = Predmeti.objects.all()
+    return render(request, 'lista_predmeta.html', {'predmeti': predmeti})
+
+
+
+
+@login_required
+@user_passes_test(check_admin)
+def promjena_predmeta(request, predmet_id):
+    predmet = get_object_or_404(Predmeti, id=predmet_id)
+    form = PredmetForm(request.POST or None, instance=predmet)
+    if form.is_valid():
+        form.save()
+        return redirect('lista_predmeta')
+    return render(request, 'promjena_predmeta.html', {'form': form})

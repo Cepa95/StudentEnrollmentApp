@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from EnrollmentApp.views import add_user, logout_view, success_login, add_subject
+from EnrollmentApp.views import lista_predmeta, promjena_predmeta
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -30,6 +31,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', logout_view, name='logout'),
     path('add_subject/', add_subject, name='add_subject'),
-    
+    path('subjects/', lista_predmeta, name='lista_predmeta'),
+    path('subjects/<int:predmet_id>/promjena/', promjena_predmeta, name='promjena_predmeta'),
 
 ]

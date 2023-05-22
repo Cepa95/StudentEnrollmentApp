@@ -1,0 +1,5 @@
+{% for predmet in predmeti %}
+    <h2>{{ predmet.name }}</h2>
+    <p>Kod: {{ predmet.kod }}</p>
+    <a href="{% url 'promjena_predmeta' predmet.id %}">Promijeni</a>
+{% endfor %}
