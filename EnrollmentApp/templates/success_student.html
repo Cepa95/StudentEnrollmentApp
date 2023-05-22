@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>Success!</h2>
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>Student</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+   
+      
+      
+</body>
+</html>

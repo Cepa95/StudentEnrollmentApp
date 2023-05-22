@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2>Add User</h2>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <form method="post" action="{% url 'add_user' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="username">Username:</label></td>
+                <td><input type="text" id="username" name="username" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" id="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td><label for="repeat_password">Repeat Password:</label></td>
+                <td><input type="password" id="repeat_password" name="repeat_password" required></td>
+            </tr>
+            <tr>
+                <td><label for="first_name">First Name:</label></td>
+                <td><input type="text" id="first_name" name="first_name" required></td>
+            </tr>
+            <tr>
+                <td><label for="last_name">Last Name:</label></td>
+                <td><input type="text" id="last_name" name="last_name" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="role">Role:</label></td>
+                <td>
+                    <select id="role" name="role" required>
+                        <option value="student">Student</option>
+                        <option value="administrator">Administrator</option>
+                        <option value="profesor">Profesor</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="status">Status:</label></td>
+                <td>
+                    <select id="status" name="status" required>
+                        <option value="none">None</option>
+                        <option value="redovan">Redovan</option>
+                        <option value="izvanredan">Izvanredan</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Add User">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

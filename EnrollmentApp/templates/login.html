@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="login">
+                        </td>
+                    </tr>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
