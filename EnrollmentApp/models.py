@@ -43,4 +43,4 @@ class Predmeti(models.Model):
     sem_red = models.IntegerField(null=False)
     sem_izv = models.IntegerField(null=False)
     izborni = models.CharField(max_length=10, choices=IZBORNI)
-    nositelj = models.ForeignKey(Korisnici, limit_choices_to={'role':'PROFESOR'}, on_delete=models.SET_NULL, null=True, default=None)
+    nositelj = models.ForeignKey(Korisnici, on_delete=models.SET_NULL, null=True, default=None)

@@ -3,7 +3,7 @@ from .models import Korisnici
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
-from .forms import PredmetiForm
+from .forms import PredmetForm
 # Create your views here.
 
 
@@ -66,12 +66,16 @@ def logout_view(request):
 @login_required
 @user_passes_test(check_admin)
 def add_subject(request):
-    profesori = Korisnici.objects.filter(role='profesor')
     if request.method == 'POST':
-        form = PredmetiForm(request.POST)
+        form = PredmetForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect('/success/') 
     else:
-        form = PredmetiForm()
-    return render(request, 'add_subject.html', {'form': form, 'profesori': profesori})
+        form = PredmetForm()
+    
+    context = {
+        'form': form,
+        'professors': Korisnici.objects.filter(role='profesor')
+    }
+    return render(request, 'add_subject.html', context)
