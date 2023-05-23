@@ -32,10 +32,14 @@ class Korisnici(AbstractUser):
         related_name='korisnici_set'  # Specify a unique related_name
     )
 
+    @classmethod
+    def get_students(cls):
+        return cls.objects.filter(role=cls.RoleChoices.STUDENT.value)
+
 
 
 class Predmeti(models.Model):
-    IZBORNI = (('DA', 'da'), ('NE', 'ne'))
+    IZBORNI = (('da', 'da'), ('ne', 'ne'))
     name = models.CharField(max_length=50)
     kod = models.CharField(max_length=10)
     program = models.TextField(max_length=50,null=False)

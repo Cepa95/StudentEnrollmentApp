@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'success' %}">HOME</a>
+            <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+            <a href="{% url 'add_user' %}">ADD USER</a>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'logout' %}">LOGOUT</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    {% for student in students %}
+    <div class="student-info">
+        <h2>{{ student.first_name }} {{ student.last_name }}</h2>
+        <p>Role: {{ student.role }}</p>
+        <p>Status: {{ student.status }}</p>
+        <a href="{% url 'edit_student' student.id %}">Edit</a>
+    </div>
+    <hr>
+    {% endfor %}
+</body>
+</html>

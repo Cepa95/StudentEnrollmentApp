@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from EnrollmentApp.views import add_user, logout_view, success_login, add_subject
-from EnrollmentApp.views import lista_predmeta, promjena_predmeta
+from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -33,5 +33,7 @@ urlpatterns = [
     path('add_subject/', add_subject, name='add_subject'),
     path('subjects/', lista_predmeta, name='lista_predmeta'),
     path('subjects/<int:predmet_id>/promjena/', promjena_predmeta, name='promjena_predmeta'),
+    path('students/', student_list, name='student_list'),
+    path('students/<int:student_id>/edit/', edit_student, name='edit_student'),
 
 ]

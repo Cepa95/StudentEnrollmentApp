@@ -3,7 +3,7 @@ from .models import Korisnici, Predmeti
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
-from .forms import PredmetForm
+from .forms import PredmetForm, KorisniciForm
 # Create your views here.
 
 
@@ -81,15 +81,11 @@ def add_subject(request):
     return render(request, 'add_subject.html', context)
 
 
-
-
 @login_required
 @user_passes_test(check_admin)
 def lista_predmeta(request):
     predmeti = Predmeti.objects.all()
     return render(request, 'lista_predmeta.html', {'predmeti': predmeti})
-
-
 
 
 @login_required
@@ -101,3 +97,21 @@ def promjena_predmeta(request, predmet_id):
         form.save()
         return redirect('lista_predmeta')
     return render(request, 'promjena_predmeta.html', {'form': form})
+
+
+@login_required
+@user_passes_test(check_admin)
+def student_list(request):
+    students = Korisnici.get_students()
+    return render(request, 'student_list.html', {'students': students})
+
+
+@login_required
+@user_passes_test(check_admin)
+def edit_student(request, student_id):
+    student = get_object_or_404(Korisnici, id=student_id)
+    form = KorisniciForm(request.POST or None, instance=student)
+    if form.is_valid():
+        form.save()
+        return redirect('student_list')
+    return render(request, 'edit_student.html', {'form': form})
