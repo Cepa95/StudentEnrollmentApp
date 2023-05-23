@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Enrollment</title>
-</head>
-<body>
-    <h1>Edit Enrollment</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save Changes">
-    </form>
-</body>
-</html>
+<form method="post" action="{% url 'success' pk=enrollment.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+  

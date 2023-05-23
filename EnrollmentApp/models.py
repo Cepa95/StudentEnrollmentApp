@@ -49,6 +49,8 @@ class Predmeti(models.Model):
     izborni = models.CharField(max_length=10, choices=IZBORNI)
     nositelj = models.ForeignKey(Korisnici, on_delete=models.SET_NULL, null=True, default=None)
 
+    def __str__(self):
+        return self.name
 
 
 class StudentEnrollment(models.Model):

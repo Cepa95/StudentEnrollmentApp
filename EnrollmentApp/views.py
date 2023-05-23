@@ -131,28 +131,27 @@ def create_enrollment(request):
         form = StudentEnrollmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('enrollment_list')
+            return redirect('success')
     else:
         form = StudentEnrollmentForm()
-    return render(request, 'create_enrollment.html', {'form': form})
 
-
-
-@login_required
-@user_passes_test(check_admin)
-def edit_enrollment(request, pk):
-    if request.method == 'POST':
-        form = StudentEnrollmentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('enrollment_list')
-    else:
-        form = PredmetForm()
-    
+    students = Korisnici.objects.filter(role='student')
     context = {
         'form': form,
-        'student': Korisnici.objects.filter(role='student')
+        'students': students
     }
-    return render(request, 'enrolment.html', context)
+    return render(request, 'create_enrollment.html', context)
 
-##ima jos posla nastavak
+
+# @login_required
+# @user_passes_test(check_admin)
+# def edit_enrollment(request, pk):
+#     enrollment = get_object_or_404(StudentEnrollment, pk=pk)
+#     if request.method == 'POST':
+#         form = StudentEnrollmentForm(request.POST, instance=enrollment)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('enrollment_list')
+#     else:
+#         form = StudentEnrollmentForm(instance=enrollment)
+#     return render(request, 'edit_enrollment.html', {'form': form})

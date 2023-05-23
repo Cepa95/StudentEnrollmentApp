@@ -11,10 +11,11 @@
             <a href="{% url 'success' %}">HOME</a>
             <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
             <a href="{% url 'add_user' %}" class="current">ADD USER</a>
+            <a href="{% url 'create_enrollment' %}"> ENROLL</a>
             <a href="{% url 'student_list' %}">STUDENT LIST</a>
         </div>
         <div class="nav-right">
-            <a href="{% url 'logout' %}">LOGOUT</a>
+            <a href="{% url 'logout' %}" class ="logout" >LOGOUT</a>
         </div>
     </nav>
     <br>

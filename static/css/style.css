@@ -91,3 +91,6 @@ nav {
   .predmet-info a {
     margin-right: 10px;
   }
+
+  .logout:hover{ background-color: #4CAF50;
+    color: black; }

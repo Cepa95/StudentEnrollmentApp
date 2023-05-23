@@ -1,14 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Create Enrollment</title>
-</head>
-<body>
-    <h1>Create Enrollment</h1>
-    <form method="post">
+  <head>
+    <title>ENROLL</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <a href="{% url 'success' %}">HOME</a>
+        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+        <a href="{% url 'add_user' %}" >ADD USER</a>
+        <a href="{% url 'create_enrollment' %}" class="current"> ENROLL</a>
+      </div>
+      <div class="nav-right">
+        <a href="{% url 'logout' %}" class ="logout" >LOGOUT</a>
+      </div>
+    </nav>
+    <h2>Add User</h2>
+    <table>
+      <form method="post" action="{% url 'create_enrollment' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create">
-    </form>
-</body>
+        <tr>
+          <th>{{ form.student.label_tag }}</th>
+          <td>{{ form.student }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.subject.label_tag }}</th>
+          <td>{{ form.subject }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.status.label_tag }}</th>
+          <td>
+            <select id="status" name="status" required>
+              <option value="Enrolled">Enrolled</option>
+              <option value="Passed">Passed</option>
+              <option value="Failed">Failed</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" value="Create Enrollment">
+          </td>
+        </tr>
+      </form>
+    </table>
+  </body>
 </html>
