@@ -8,18 +8,22 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'success' %}" class="current">HOME</a>
-        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
-        <a href="{% url 'add_user' %}">ADD USER</a>
+        <div class="nav-left">
+          <a href="{% url 'success' %}" class="current" >HOME</a>
+          <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+          <a href="{% url 'add_user' %}">ADD USER</a>
+        </div>
+        <div class="nav-right">
+          <a href="{% url 'logout' %}">LOGOUT</a>
+        </div>
     </nav>
     <br>
     <br>
     <br>
     
     <h2>Welcome, {{ user.username }}!</h2>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="logout">
-    </form>
+    <form action="{% url 'lista_predmeta' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="list all">
 </body>
 </html>

@@ -7,13 +7,15 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'success' %}">HOME</a>
-        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
-        <a href="{% url 'add_user' %}" class="current">ADD USER</a>
-        </nav>
-        <br>
-        <br>
-        <br>
+        <div class="nav-left">
+          <a href="{% url 'success' %}">HOME</a>
+          <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+          <a href="{% url 'add_user' %}" class="current">ADD USER</a>
+        </div>
+        <div class="nav-right">
+          <a href="{% url 'logout' %}">LOGOUT</a>
+        </div>
+      </nav>
     <h2>Add User</h2>
     {% if error_message %}
         <p>{{ error_message }}</p>

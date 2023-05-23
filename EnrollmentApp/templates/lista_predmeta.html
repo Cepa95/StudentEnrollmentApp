@@ -1,5 +1,41 @@
-{% for predmet in predmeti %}
-    <h2>{{ predmet.name }}</h2>
-    <p>Kod: {{ predmet.kod }}</p>
-    <a href="{% url 'promjena_predmeta' predmet.id %}">Promijeni</a>
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+<body>
+    <nav>
+        <div class="nav-left">
+          <a href="{% url 'success' %}">HOME</a>
+          <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+          <a href="{% url 'add_user' %}">ADD USER</a>
+        </div>
+        <div class="nav-right">
+          <a href="{% url 'logout' %}">LOGOUT</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    {% for predmet in predmeti %}
+    <div class="predmet-info">
+        <h2>{{ predmet.name }}</h2>
+        <p>Kod: {{ predmet.kod }}</p>
+        <a href="{% url 'promjena_predmeta' predmet.id %}">Edit</a>
+    </div>
+    <hr>
 {% endfor %}
+</body>
+</html>
+
+
+
+
+
+

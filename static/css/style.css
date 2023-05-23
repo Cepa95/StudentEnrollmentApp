@@ -51,6 +51,14 @@ nav {
     color: rgb(245, 239, 238);  
     z-index: 100;
   }
+
+  .nav-left {
+    display: flex;
+  }
+  
+  .nav-right {
+    margin-left: auto; 
+  }
   
   nav a {
     text-align: center;
@@ -72,3 +80,14 @@ nav {
 
   .current{background-color: #ddd;
   color: black}
+
+  .predmet-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .predmet-info h2,
+  .predmet-info p,
+  .predmet-info a {
+    margin-right: 10px;
+  }
