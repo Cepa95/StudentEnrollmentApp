@@ -1,23 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Add Subject</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+  <body>
+    <nav>
+    <a href="{% url 'success' %}">HOME</a>
+    <a href="{% url 'add_subject' %}" class="current">ADD SUBJECT</a>
+    <a href="{% url 'add_user' %}">ADD USER</a>
+    </nav>
+    <br>
+    <br>
+    <br>
     <h2>Add Subject</h2>
     <form method="POST">
-        {% csrf_token %}
-        <table>
-            {% for field in form %}
-            <tr>
-                <td>{{ field.label_tag }}</td>
-                <td>{{ field }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <input type="submit" value="Submit">
+      {% csrf_token %}
+      <table>
+        {% for field in form %}
+        <tr>
+          <td>{{ field.label_tag }}</td>
+          <td>{{ field }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <input type="submit" value="Submit" />
     </form>
-</body>
+  </body>
 </html>

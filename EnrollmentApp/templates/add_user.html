@@ -6,6 +6,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <nav>
+        <a href="{% url 'success' %}">HOME</a>
+        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+        <a href="{% url 'add_user' %}" class="current">ADD USER</a>
+        </nav>
+        <br>
+        <br>
+        <br>
     <h2>Add User</h2>
     {% if error_message %}
         <p>{{ error_message }}</p>
@@ -59,7 +67,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Add User">
+                    <input type="submit" value="Submit">
                 </td>
             </tr>
         </table>
