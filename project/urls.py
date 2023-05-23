@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from EnrollmentApp.views import add_user, logout_view, success_login, add_subject
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student
-from EnrollmentApp.views import create_enrollment #enrollment_list #edit_enrollment
+from EnrollmentApp.views import create_enrollment,enrollment_list #edit_enrollment
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -30,7 +30,7 @@ urlpatterns = [
     path('success/', success_login, name='success'),
     # path('success/', success, name='success'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', logout_view, name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('add_subject/', add_subject, name='add_subject'),
     path('subjects/', lista_predmeta, name='lista_predmeta'),
     path('subjects/<int:predmet_id>/promjena/', promjena_predmeta, name='promjena_predmeta'),
@@ -39,5 +39,8 @@ urlpatterns = [
     # path('enrollments/', enrollment_list, name='enrollment_list'),
     path('enrollments/create/', create_enrollment, name='create_enrollment'),
     # path('enrollments/<int:enrollment_id>/edit/', edit_enrollment, name='edit_enrollment'),
+     path('student_list/', student_list, name='student_list'),
+    path('edit_student/<int:student_id>/', edit_student, name='edit_student'),
+    path('enrollment_list/<int:student_id>/', enrollment_list, name='enrollment_list'),
 
 ]

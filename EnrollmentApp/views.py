@@ -3,8 +3,9 @@ from .models import Korisnici, Predmeti, StudentEnrollment
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
-from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm
-from django.http import HttpResponse
+from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnrollmentForm1
+from django.forms import modelformset_factory
+from django.forms import formset_factory
 # Create your views here.
 
 
@@ -55,11 +56,8 @@ def success_login(request):
 
 @login_required
 def logout_view(request):
-    if request.method == 'POST':
         logout(request)
-        return redirect(reverse('login'))
-    else:
-        return render(request, 'logout.html')
+        return redirect('/accounts/login/')
     
 
 @login_required
@@ -117,23 +115,38 @@ def edit_student(request, student_id):
 
 
 
-# @login_required
-# @user_passes_test(check_admin)
-# def enrollment_list(request):
-#     enrollments = StudentEnrollment.objects.all()
-#     return render(request, 'enrollment_list.html', {'enrollments': enrollments})
+
+@login_required
+@user_passes_test(check_admin)
+def enrollment_list(request, student_id):
+    student = get_object_or_404(Korisnici, id=student_id)
+    EnrollmentFormSet = formset_factory(StudentEnrollmentForm, extra=0)
+    if request.method == 'POST':
+        formset = EnrollmentFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                enrollment = form.save(commit=False)
+                enrollment.student = student
+                enrollment.save()
+            return redirect('success')
+    else:
+        enrollments = StudentEnrollment.objects.filter(student=student)
+        initial_data = [{'subject': enrollment.subject, 'status': enrollment.status} for enrollment in enrollments]
+        formset = EnrollmentFormSet(initial=initial_data)
+    return render(request, 'enrollment_list.html', {'student': student, 'formset': formset})
+
 
 
 @login_required
 @user_passes_test(check_admin)
 def create_enrollment(request):
     if request.method == 'POST':
-        form = StudentEnrollmentForm(request.POST)
+        form = StudentEnrollmentForm1(request.POST)
         if form.is_valid():
             form.save()
             return redirect('success')
     else:
-        form = StudentEnrollmentForm()
+        form = StudentEnrollmentForm1()
 
     students = Korisnici.objects.filter(role='student')
     context = {

@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'EnrollmentApp.Korisnici'
 LOGIN_REDIRECT_URL = '/success/'
-
+LOGOUT_REDIRECT_URL = 'accounts/login/'
 
 
 LANGUAGE_CODE = 'en-us'

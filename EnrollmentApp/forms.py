@@ -26,7 +26,7 @@ class KorisniciForm(forms.ModelForm):
         fields = '__all__'
 
 
-class StudentEnrollmentForm(forms.ModelForm):
+class StudentEnrollmentForm1(forms.ModelForm):
     class Meta:
         model = StudentEnrollment
         fields = ['student', 'subject', 'status']
@@ -35,3 +35,10 @@ class StudentEnrollmentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Filter students with role="student"
         self.fields['student'].queryset = Korisnici.objects.filter(role='student')
+
+
+
+class StudentEnrollmentForm(forms.ModelForm):
+    class Meta:
+        model = StudentEnrollment
+        fields = ['subject', 'status']

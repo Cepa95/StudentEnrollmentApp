@@ -18,7 +18,7 @@
           <a href="{% url 'create_enrollment' %}"> ENROLL</a>
         </div>
         <div class="nav-right">
-          <a href="{% url 'logout' %}" class ="logout" >LOGOUT</a>
+          <a href="/accounts/login/" class="logout">LOGOUT</a>
         </div>
     </nav>
     <br>
@@ -28,7 +28,7 @@
     <div class="predmet-info">
         <h2>{{ predmet.name }}</h2>
         <p>Kod: {{ predmet.kod }}</p>
-        <a href="{% url 'promjena_predmeta' predmet.id %}">Edit</a>
+        <a href="{% url 'promjena_predmeta' predmet.id %}" class="list">Edit</a>
     </div>
     <hr>
 {% endfor %}
