@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enrollment List</title>
+</head>
+<body>
+    <h1>Enrollment List</h1>
+    <ul>
+        {% for enrollment in enrollments %}
+        <li>{{ enrollment.student }} - {{ enrollment.subject }} - {{ enrollment.status }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_enrollment' %}">Create Enrollment</a>
+</body>
+</html>

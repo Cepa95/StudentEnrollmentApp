@@ -22,14 +22,14 @@ class Korisnici(AbstractUser):
         Permission,
         verbose_name='user permissions',
         blank=True,
-        related_name='korisnici_set'  # Specify a unique related_name
+        related_name='korisnici_set' 
     )
 
     groups = models.ManyToManyField(
         'auth.Group',
         verbose_name='groups',
         blank=True,
-        related_name='korisnici_set'  # Specify a unique related_name
+        related_name='korisnici_set' 
     )
 
     @classmethod
@@ -48,3 +48,15 @@ class Predmeti(models.Model):
     sem_izv = models.IntegerField(null=False)
     izborni = models.CharField(max_length=10, choices=IZBORNI)
     nositelj = models.ForeignKey(Korisnici, on_delete=models.SET_NULL, null=True, default=None)
+
+
+
+class StudentEnrollment(models.Model):
+    class StatusChoices(Enum):
+        ENROLLED = 'Enrolled'
+        PASSED = 'Passed'
+        FAILED = 'Failed'
+    student = models.ForeignKey(Korisnici, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Predmeti, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=[(status.value, status.name) for status in StatusChoices])
+   

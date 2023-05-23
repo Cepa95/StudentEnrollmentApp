@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Korisnici, Predmeti
+from .models import Korisnici, Predmeti, StudentEnrollment
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
-from .forms import PredmetForm, KorisniciForm
+from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm
+from django.http import HttpResponse
 # Create your views here.
 
 
@@ -61,8 +62,6 @@ def logout_view(request):
         return render(request, 'logout.html')
     
 
-
-
 @login_required
 @user_passes_test(check_admin)
 def add_subject(request):
@@ -115,3 +114,45 @@ def edit_student(request, student_id):
         form.save()
         return redirect('student_list')
     return render(request, 'edit_student.html', {'form': form})
+
+
+
+# @login_required
+# @user_passes_test(check_admin)
+# def enrollment_list(request):
+#     enrollments = StudentEnrollment.objects.all()
+#     return render(request, 'enrollment_list.html', {'enrollments': enrollments})
+
+
+@login_required
+@user_passes_test(check_admin)
+def create_enrollment(request):
+    if request.method == 'POST':
+        form = StudentEnrollmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('enrollment_list')
+    else:
+        form = StudentEnrollmentForm()
+    return render(request, 'create_enrollment.html', {'form': form})
+
+
+
+@login_required
+@user_passes_test(check_admin)
+def edit_enrollment(request, pk):
+    if request.method == 'POST':
+        form = StudentEnrollmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('enrollment_list')
+    else:
+        form = PredmetForm()
+    
+    context = {
+        'form': form,
+        'student': Korisnici.objects.filter(role='student')
+    }
+    return render(request, 'enrolment.html', context)
+
+##ima jos posla nastavak

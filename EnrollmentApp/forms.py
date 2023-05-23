@@ -1,5 +1,5 @@
 from django import forms
-from .models import Predmeti, Korisnici
+from .models import Predmeti, Korisnici, StudentEnrollment
 
 class PredmetForm(forms.ModelForm):
     nositelj = forms.ModelChoiceField(
@@ -24,3 +24,9 @@ class KorisniciForm(forms.ModelForm):
     class Meta:
         model = Korisnici
         fields = '__all__'
+
+
+class StudentEnrollmentForm(forms.ModelForm):
+    class Meta:
+        model = StudentEnrollment
+        fields = ['student', 'subject', 'status']
