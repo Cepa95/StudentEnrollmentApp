@@ -35,6 +35,10 @@ class Korisnici(AbstractUser):
     @classmethod
     def get_students(cls):
         return cls.objects.filter(role=cls.RoleChoices.STUDENT.value)
+    
+    @classmethod
+    def get_professors(cls):
+        return cls.objects.filter(role=cls.RoleChoices.PROFESOR.value)
 
 
 

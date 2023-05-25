@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Professor List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'success' %}">HOME</a>
+            <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+            <a href="{% url 'add_user' %}">ADD USER</a>
+            <a href="{% url 'create_enrollment' %}"> ENROLL</a>
+        </div>
+        <div class="nav-right">
+            <a href="/accounts/login/" class="logout">LOGOUT</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    {% for professor in professors %}
+    <div class="student-info">
+        <h2>{{ professor.first_name }} {{ professor.last_name }}</h2>
+        <p>Role: {{ professor.role }}</p>
+        <a href="{% url 'edit_professor' professor.id %}" class="list" >Edit  </a>  
+    </div>
+    <hr>
+    {% endfor %}
+</body>
+</html>

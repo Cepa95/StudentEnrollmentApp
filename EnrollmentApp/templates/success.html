@@ -32,5 +32,9 @@
       {% csrf_token %}
       <input type="submit" value="list all students">
     </form>
+    <form action="{% url 'professor_list' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="list all professors">
+    </form>
 </body>
 </html>

@@ -168,3 +168,22 @@ def create_enrollment(request):
 #     else:
 #         form = StudentEnrollmentForm(instance=enrollment)
 #     return render(request, 'edit_enrollment.html', {'form': form})
+
+
+@login_required
+@user_passes_test(check_admin)
+def professor_list(request):
+    professors = Korisnici.get_professors()
+    return render(request, 'professor_list.html', {'professors': professors})
+
+
+
+@login_required
+@user_passes_test(check_admin)
+def edit_professor(request, professor_id):
+    professor = get_object_or_404(Korisnici, id=professor_id)
+    form = KorisniciForm(request.POST or None, instance=professor)
+    if form.is_valid():
+        form.save()
+        return redirect('profesor_list')
+    return render(request, 'edit_professor.html', {'form': form})
