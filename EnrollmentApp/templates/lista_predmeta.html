@@ -28,7 +28,10 @@
     <div class="predmet-info">
         <h2>{{ predmet.name }}</h2>
         <p>Kod: {{ predmet.kod }}</p>
-        <a href="{% url 'promjena_predmeta' predmet.id %}" class="list">Edit</a>
+        <span class="space"></span>
+        <a href="{% url 'promjena_predmeta' predmet.id %}" class="list" >Edit</a>
+        <span class="space"></span>
+        <a href="{% url 'popis_studenata' predmet.id %}" class="list">Vidi popis studenata</a>
     </div>
     <hr>
 {% endfor %}

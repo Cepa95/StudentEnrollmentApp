@@ -233,3 +233,11 @@ def edit_professor(request, professor_id):
 
 def cover_view(request):
     return render(request, 'cover.html')
+
+
+@login_required
+@user_passes_test(check_admin)
+def popis_studenata(request, predmet_id):
+    predmet = get_object_or_404(Predmeti, id=predmet_id)
+    enrollments = StudentEnrollment.objects.filter(subject=predmet)
+    return render(request, 'popis_studenata.html', {'predmet': predmet, 'enrollments': enrollments})

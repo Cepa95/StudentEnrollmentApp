@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from EnrollmentApp.views import add_user, logout_view, success_login, add_subject, cover_view
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student, professor_list, edit_professor
-from EnrollmentApp.views import create_enrollment,enrollment_list
+from EnrollmentApp.views import create_enrollment,enrollment_list, popis_studenata
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -34,6 +34,7 @@ urlpatterns = [
     path('add_subject/', add_subject, name='add_subject'),
     path('subjects/', lista_predmeta, name='lista_predmeta'),
     path('subjects/<int:predmet_id>/promjena/', promjena_predmeta, name='promjena_predmeta'),
+    path('subjects/<int:predmet_id>/popis_studenata/', popis_studenata, name='popis_studenata'),
     path('students/', student_list, name='student_list'),
     path('students/<int:student_id>/edit/', edit_student, name='edit_student'),
     # path('enrollments/', enrollment_list, name='enrollment_list'),
@@ -45,5 +46,5 @@ urlpatterns = [
     path('professor_list/', professor_list, name='professor_list'),
     path('edit_professor/<int:professor_id>/', edit_professor, name='edit_professor'),
     path('cover/',cover_view, name='cover_view'),
-
+    
 ]
