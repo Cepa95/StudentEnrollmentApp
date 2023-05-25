@@ -15,7 +15,8 @@
           <a href="{% url 'create_enrollment' %}"> ENROLL</a>
         </div>
         <div class="nav-right">
-          <a href="/accounts/login/" class="logout">LOGOUT</a>
+          {% csrf_token %}
+          <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
         </div>
     </nav>
     <br>
@@ -26,15 +27,15 @@
     <br>
     <form action="{% url 'lista_predmeta' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="list all subjects">
+      <input type="submit" value="list all subjects" style="width: 150px">
     </form>
-    <form action="{% url 'student_list' %}" method="post">
+    <form action="{% url 'student_list' %}" method="post" >
       {% csrf_token %}
-      <input type="submit" value="list all students">
+      <input type="submit" value="list all students" style="width: 150px">
     </form>
     <form action="{% url 'professor_list' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="list all professors">
+      <input type="submit" value="list all professors" style="width: 150px">
     </form>
 </body>
 </html>

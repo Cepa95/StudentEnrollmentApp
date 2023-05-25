@@ -6,6 +6,7 @@ from django.urls import reverse
 from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnrollmentForm1
 from django.forms import modelformset_factory
 from django.forms import formset_factory
+from django.middleware.csrf import rotate_token
 # Create your views here.
 
 
@@ -54,10 +55,18 @@ def success_login(request):
 
 
 
+# @login_required
+# def logout_view(request):
+#         logout(request)
+#         return redirect('/accounts/login/')
+
+
 @login_required
 def logout_view(request):
-        logout(request)
-        return redirect('/accounts/login/')
+    logout(request)
+    # Delete CSRF token (optional)
+    rotate_token(request)
+    return redirect('/accounts/login/')
     
 
 @login_required
@@ -187,3 +196,7 @@ def edit_professor(request, professor_id):
         form.save()
         return redirect('profesor_list')
     return render(request, 'edit_professor.html', {'form': form})
+
+
+def cover_view(request):
+    return render(request, 'cover.html')

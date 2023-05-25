@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Student</title>
+    <title>Edit Professor</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <a href="{% url 'professor_list' %}">PROFESOR LIST</a>
         </div>
         <div class="nav-right">
-            <a href="/accounts/login/" class="logout">LOGOUT</a>
+            <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
         </div>
     </nav>
     <br>

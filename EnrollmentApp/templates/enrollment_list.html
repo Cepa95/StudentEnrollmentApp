@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HOME</title>
+    <title>list</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -19,7 +19,7 @@
         <a href="{% url 'student_list' %}"> STUDENT LIST</a>
       </div>
       <div class="nav-right">
-        <a href="/accounts/login/" class="logout">LOGOUT</a>
+        <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
       </div>
     </nav>
     <br />

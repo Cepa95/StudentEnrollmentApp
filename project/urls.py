@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from EnrollmentApp.views import add_user, logout_view, success_login, add_subject
+from EnrollmentApp.views import add_user, logout_view, success_login, add_subject, cover_view
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student, professor_list, edit_professor
 from EnrollmentApp.views import create_enrollment,enrollment_list #edit_enrollment
 from django.conf import settings
@@ -30,7 +30,7 @@ urlpatterns = [
     path('success/', success_login, name='success'),
     # path('success/', success, name='success'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/accounts/login/'), name='logout'),
     path('add_subject/', add_subject, name='add_subject'),
     path('subjects/', lista_predmeta, name='lista_predmeta'),
     path('subjects/<int:predmet_id>/promjena/', promjena_predmeta, name='promjena_predmeta'),
@@ -43,6 +43,7 @@ urlpatterns = [
     path('edit_student/<int:student_id>/', edit_student, name='edit_student'),
     path('enrollment_list/<int:student_id>/', enrollment_list, name='enrollment_list'),
     path('professor_list/', professor_list, name='professor_list'),
-     path('edit_professor/<int:professor_id>/', edit_professor, name='edit_professor'),
+    path('edit_professor/<int:professor_id>/', edit_professor, name='edit_professor'),
+    path('cover/',cover_view, name='cover_view'),
 
 ]
