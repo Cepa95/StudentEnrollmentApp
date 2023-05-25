@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from EnrollmentApp.views import add_user, logout_view, success_login, add_subject, cover_view
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student, professor_list, edit_professor
-from EnrollmentApp.views import create_enrollment,enrollment_list #edit_enrollment
+from EnrollmentApp.views import create_enrollment,enrollment_list
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views

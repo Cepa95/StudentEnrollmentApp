@@ -124,25 +124,58 @@ def edit_student(request, student_id):
 
 
 
+# @login_required
+# @user_passes_test(check_admin)
+# def enrollment_list(request, student_id):
+#     student = get_object_or_404(Korisnici, id=student_id)
+#     EnrollmentFormSet = formset_factory(StudentEnrollmentForm, extra=0)
+#     if request.method == 'POST':
+#         formset = EnrollmentFormSet(request.POST)
+#         if formset.is_valid():
+#             for form in formset:
+#                 enrollment = form.save(commit=False)
+#                 enrollment.student = student
+#                 enrollment.save()
+#             return redirect('success')
+#     else:
+#         enrollments = StudentEnrollment.objects.filter(student=student)
+#         initial_data = [{'subject': enrollment.subject, 'status': enrollment.status} for enrollment in enrollments]
+#         formset = EnrollmentFormSet(initial=initial_data)
+#     return render(request, 'enrollment_list.html', {'student': student, 'formset': formset})
+
 
 @login_required
 @user_passes_test(check_admin)
 def enrollment_list(request, student_id):
     student = get_object_or_404(Korisnici, id=student_id)
     EnrollmentFormSet = formset_factory(StudentEnrollmentForm, extra=0)
+    
     if request.method == 'POST':
         formset = EnrollmentFormSet(request.POST)
+        
         if formset.is_valid():
+            StudentEnrollment.objects.filter(student=student).delete()  # Delete existing enrollments for the student
+            
             for form in formset:
                 enrollment = form.save(commit=False)
                 enrollment.student = student
                 enrollment.save()
+            
             return redirect('success')
     else:
         enrollments = StudentEnrollment.objects.filter(student=student)
         initial_data = [{'subject': enrollment.subject, 'status': enrollment.status} for enrollment in enrollments]
         formset = EnrollmentFormSet(initial=initial_data)
-    return render(request, 'enrollment_list.html', {'student': student, 'formset': formset})
+    
+    context = {
+        'student': student,
+        'formset': formset
+    }
+    return render(request, 'enrollment_list.html', context)
+
+
+
+
 
 
 

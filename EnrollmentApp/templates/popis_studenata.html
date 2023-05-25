@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Popis studenata</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <a href="{% url 'success' %}">HOME</a>
+        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+        <a href="{% url 'add_user' %}">ADD USER</a>
+        <a href="{% url 'create_enrollment' %}">ENROLL</a>
+      </div>
+      <div class="nav-right">
+        <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+      </div>
+    </nav>
+
+    <h2>Popis studenata za predmet "{{ predmet.name }}"</h2>
+    <hr>
+
+    {% for student in predmet.students %}
+      <div class="student-info">
+        <h3>{{ student.name }}</h3>
+        <p>Email: {{ student.email }}</p>
+        <p>Status: {{ student.enrollment.status }}</p>
+      </div>
+      <hr>
+    {% empty %}
+      <p>Nema upisanih studenata za ovaj predmet.</p>
+    {% endfor %}
+
+  </body>
+</html>
