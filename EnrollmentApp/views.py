@@ -10,10 +10,12 @@ from django.middleware.csrf import rotate_token
 # Create your views here.
 
 
-
-
 def check_admin(user):
     return user.role == 'administrator'
+
+
+def check_professor(user):
+     return user.role == 'profesor'
 
 
 @login_required
@@ -50,10 +52,11 @@ def success_login(request):
         return render(request, 'success.html', {'user': user})
     elif user.role == 'student':
         return render(request, 'success_student.html', {'user': user})
+    elif user.role == 'profesor':
+        return render(request, 'success_professor.html', {'user': user})   
     else:
-        return render(request, 'success.html', {'user': user})   
-
-
+        return redirect('/accounts/login/')
+    
 
 # @login_required
 # def logout_view(request):
@@ -123,7 +126,6 @@ def edit_student(request, student_id):
     return render(request, 'edit_student.html', {'form': form})
 
 
-
 # @login_required
 # @user_passes_test(check_admin)
 # def enrollment_list(request, student_id):
@@ -175,10 +177,6 @@ def enrollment_list(request, student_id):
 
 
 
-
-
-
-
 @login_required
 @user_passes_test(check_admin)
 def create_enrollment(request):
@@ -219,7 +217,6 @@ def professor_list(request):
     return render(request, 'professor_list.html', {'professors': professors})
 
 
-
 @login_required
 @user_passes_test(check_admin)
 def edit_professor(request, professor_id):
@@ -241,3 +238,27 @@ def popis_studenata(request, predmet_id):
     predmet = get_object_or_404(Predmeti, id=predmet_id)
     enrollments = StudentEnrollment.objects.filter(subject=predmet)
     return render(request, 'popis_studenata.html', {'predmet': predmet, 'enrollments': enrollments})
+
+
+@login_required
+@user_passes_test(check_professor)
+def professor_subjects(request):
+    list = Predmeti.objects.filter(nositelj=request.user)
+    context = {
+        'list': list
+    }
+    return render(request, 'professor_subject.html', context)
+
+
+
+@login_required
+@user_passes_test(check_professor)
+def subject_student_list(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    enrollments = StudentEnrollment.objects.filter(subject=subject)
+    students = [enrollment.student for enrollment in enrollments]
+    context = {
+        'subject': subject,
+        'students': students
+    }
+    return render(request, 'subject_student_list.html', context)

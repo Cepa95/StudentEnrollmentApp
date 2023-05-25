@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+          <a href="{% url 'success' %}" class="current" >HOME</a>
+          <a href="{% url 'professor_subjects' %}">SUBJECTS</a>
+        </div>
+        <div class="nav-right">
+          {% csrf_token %}
+          <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <h2>Welcome, {{ user.username }}!</h2>
+    <br>  
+</body>
+</html>
