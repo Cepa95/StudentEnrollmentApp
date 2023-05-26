@@ -25,6 +25,14 @@
                 <b>{{ subject.name }}</b>
                 <span class="space"></span>
                 <a href="{% url 'subject_student_list' subject.id %}" class="list">View Student List</a>
+                <span class="space"></span>
+                <a href="{% url 'subject_passed_students' subject.id %}" class="list">View Passed Students</a> 
+                <span class="space"></span>
+                <a href="{% url 'subject_enrolled_students' subject.id %}" class="list">View Enrolled Students</a>
+                <span class="space"></span>
+                <a href="{% url 'subject_failed_students' subject.id %}" class="list">View Failed Students</a>
+                <span class="space"></span>
+                <a href="{% url 'subject_details' subject.id %}" class="list">Details</a>
             </li>
             <hr>
             <br>

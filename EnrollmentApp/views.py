@@ -7,7 +7,6 @@ from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnr
 from django.forms import modelformset_factory
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
-from django.contrib import messages
 
 # Create your views here.
 
@@ -292,6 +291,9 @@ def edit_status(request, subject_id, student_id):
     subject = get_object_or_404(Predmeti, id=subject_id)
     enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
 
+    if enrollment.status == 'Failed' or enrollment.status == 'Passed':
+        return redirect('forbidden')
+
     if request.method == 'POST':
         form = StudentEnrollmentForm2(request.POST, instance=enrollment)
         if form.is_valid():
@@ -321,6 +323,9 @@ def edit_status(request, subject_id, student_id):
 
 #     return render(request, 'remove_subject_student.html', {'subject': subject, 'student': student})
 
+
+@login_required
+@user_passes_test(check_professor)
 def remove_subject_student(request, subject_id, student_id):
     student = get_object_or_404(Korisnici, id=student_id, role=Korisnici.RoleChoices.STUDENT.value)
     subject = get_object_or_404(Predmeti, id=subject_id)
@@ -336,6 +341,63 @@ def remove_subject_student(request, subject_id, student_id):
     
     return redirect('forbidden')
 
-
+@login_required
+@user_passes_test(check_professor)
 def forbidden(request):
     return render(request, 'forbidden.html')
+
+
+
+@login_required
+@user_passes_test(check_professor)
+def subject_passed_students(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    passed_students = Korisnici.objects.filter(studentenrollment__subject=subject, studentenrollment__status='Passed')
+
+    context = {
+        'subject': subject,
+        'passed_students': passed_students,
+    }
+
+    return render(request, 'subject_passed_students.html', context)
+
+
+@login_required
+@user_passes_test(check_professor)
+def subject_enrolled_students(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    enrolled_students = Korisnici.objects.filter(studentenrollment__subject=subject, studentenrollment__status='Enrolled')
+
+    context = {
+        'subject': subject,
+        'enrolled_students': enrolled_students,
+    }
+
+    return render(request, 'subject_enrolled_students.html', context)
+
+
+@login_required
+@user_passes_test(check_professor)
+def subject_failed_students(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    failed_students = Korisnici.objects.filter(studentenrollment__subject=subject, studentenrollment__status='Failed')
+
+    context = {
+        'subject': subject,
+        'failed_students': failed_students,
+    }
+
+    return render(request, 'subject_failed_students.html', context)
+
+
+
+@login_required
+@user_passes_test(check_professor)
+def subject_details(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+
+    context = {
+        'subject': subject,
+    }
+
+    return render(request, 'subject_details.html', context)
