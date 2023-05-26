@@ -7,6 +7,7 @@ from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnr
 from django.forms import modelformset_factory
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
+from django.contrib import messages
 
 # Create your views here.
 
@@ -266,6 +267,24 @@ def subject_student_list(request, subject_id):
 
 
 
+# @login_required
+# @user_passes_test(check_professor)
+# def edit_status(request, subject_id, student_id):
+#     student = get_object_or_404(Korisnici, id=student_id, role=Korisnici.RoleChoices.STUDENT.value)
+#     subject = get_object_or_404(Predmeti, id=subject_id)
+#     enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
+
+#     if request.method == 'POST':
+#         form = StudentEnrollmentForm2(request.POST, instance=enrollment)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('subject_student_list', subject_id=subject_id)
+#     else:
+#         form = StudentEnrollmentForm2(instance=enrollment)
+
+#     return render(request, 'edit_status.html', {'form': form, 'subject': subject})
+
+
 @login_required
 @user_passes_test(check_professor)
 def edit_status(request, subject_id, student_id):
@@ -281,4 +300,42 @@ def edit_status(request, subject_id, student_id):
     else:
         form = StudentEnrollmentForm2(instance=enrollment)
 
-    return render(request, 'edit_status.html', {'form': form, 'subject': subject})
+    context = {
+        'form': form,
+        'subject': subject,
+        'student': student,
+    }
+
+    return render(request, 'edit_status.html', context)
+
+
+# def remove_subject_student(request, subject_id, student_id):
+#     student = get_object_or_404(Korisnici, id=student_id, role=Korisnici.RoleChoices.STUDENT.value)
+#     subject = get_object_or_404(Predmeti, id=subject_id)
+#     enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
+
+#     if request.method == 'POST':
+#         enrollment.delete()
+#         messages.success(request, 'Subject and student have been removed successfully.')
+#         return redirect('professor_subjects')
+
+#     return render(request, 'remove_subject_student.html', {'subject': subject, 'student': student})
+
+def remove_subject_student(request, subject_id, student_id):
+    student = get_object_or_404(Korisnici, id=student_id, role=Korisnici.RoleChoices.STUDENT.value)
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
+
+    if enrollment.status == StudentEnrollment.StatusChoices.ENROLLED.value:
+        if request.method == 'POST':
+            enrollment.delete()
+            return redirect('professor_subjects')
+
+        return render(request, 'remove_subject_student.html', {'subject': subject, 'student': student})
+
+    
+    return redirect('forbidden')
+
+
+def forbidden(request):
+    return render(request, 'forbidden.html')

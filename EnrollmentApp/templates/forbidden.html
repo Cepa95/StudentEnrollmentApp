@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student List</title>
+    <title>Forbidden</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -10,6 +10,7 @@
         <div class="nav-left">
             <a href="{% url 'success' %}">HOME</a>
             <a href="{% url 'professor_subjects' %}">SUBJECTS</a>
+            <a href="javascript:history.back()" >RETURN</a> 
         </div>
         <div class="nav-right">
             <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
@@ -18,17 +19,8 @@
     <br>
     <br>
     <br>
-    <h2>Student List for {{ subject.name }}</h2>
-    {% if students %}
-    <ul>
-        {% for student in students %}
-            <li>{{ student.first_name }} {{ student.last_name }}</li>
-            <a href="{% url 'edit_status' subject.id student.id %}" class="list">Edit Status</a>
-            <hr>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No students enrolled in this subject.</p>
-    {% endif %}
+    <h1>Forbidden</h1>
+    <p>You do not have authorization do delete this student</p>
+    
 </body>
 </html>
