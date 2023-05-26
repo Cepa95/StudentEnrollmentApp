@@ -42,3 +42,15 @@ class StudentEnrollmentForm(forms.ModelForm):
     class Meta:
         model = StudentEnrollment
         fields = ['subject', 'status']
+
+
+
+
+class StudentEnrollmentForm2(forms.ModelForm):
+    class Meta:
+        model = StudentEnrollment
+        fields = ['status']
+
+
+
+

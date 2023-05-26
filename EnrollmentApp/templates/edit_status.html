@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Status</title>
+    <title>Student List</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <nav>
         <div class="nav-left">
             <a href="{% url 'success' %}">HOME</a>
-            <a href="{% url 'professor_subjects' %}" class="current">SUBJECTS</a>
+            <a href="{% url 'professor_subjects' %}" >SUBJECTS</a>
+            <a href="javascript:history.back()" >STUDENT LIST</a> 
         </div>
         <div class="nav-right">
             <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
@@ -18,11 +19,11 @@
     <br>
     <br>
     <br>
-    <h2>Edit Status</h2>
-    <form method="post">
+    <h2>Edit student status for {{ subject.name }}</h2>
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <input type="submit" value="Save Changes">
     </form>
 </body>
 </html>

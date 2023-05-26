@@ -3,10 +3,11 @@ from .models import Korisnici, Predmeti, StudentEnrollment
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
 from django.urls import reverse
-from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnrollmentForm1
+from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnrollmentForm1, StudentEnrollmentForm2
 from django.forms import modelformset_factory
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
+
 # Create your views here.
 
 
@@ -268,21 +269,16 @@ def subject_student_list(request, subject_id):
 @login_required
 @user_passes_test(check_professor)
 def edit_status(request, subject_id, student_id):
+    student = get_object_or_404(Korisnici, id=student_id, role=Korisnici.RoleChoices.STUDENT.value)
     subject = get_object_or_404(Predmeti, id=subject_id)
-    student = get_object_or_404(Korisnici, id=student_id)
+    enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
 
     if request.method == 'POST':
-        form = StudentEnrollmentForm(request.POST, instance=student.status)
+        form = StudentEnrollmentForm2(request.POST, instance=enrollment)
         if form.is_valid():
             form.save()
-            return redirect('subject_student_list', subject_id=subject.id)
+            return redirect('subject_student_list', subject_id=subject_id)
     else:
-        initial_data = {'subject': subject, 'status': student.status}
-        form = StudentEnrollmentForm(initial=initial_data)
+        form = StudentEnrollmentForm2(instance=enrollment)
 
-    context = {
-        'form': form,
-        'subject': subject,
-        'student': student
-    }
-    return render(request, 'edit_status.html', context)
+    return render(request, 'edit_status.html', {'form': form, 'subject': subject})

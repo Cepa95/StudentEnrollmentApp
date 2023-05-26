@@ -23,7 +23,7 @@
     <ul>
         {% for student in students %}
             <li>{{ student.first_name }} {{ student.last_name }}</li>
-            <a href="{% url 'edit_status' subject.id student.id %}">Edit Status</a>  <!-- Add this line -->
+            <a href="{% url 'edit_status' subject.id student.id %}" class="list">Edit Status</a>
             <hr>
         {% endfor %}
     </ul>
