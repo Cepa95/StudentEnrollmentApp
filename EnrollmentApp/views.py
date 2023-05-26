@@ -262,3 +262,27 @@ def subject_student_list(request, subject_id):
         'students': students
     }
     return render(request, 'subject_student_list.html', context)
+
+
+
+@login_required
+@user_passes_test(check_professor)
+def edit_status(request, subject_id, student_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    student = get_object_or_404(Korisnici, id=student_id)
+
+    if request.method == 'POST':
+        form = StudentEnrollmentForm(request.POST, instance=student.status)
+        if form.is_valid():
+            form.save()
+            return redirect('subject_student_list', subject_id=subject.id)
+    else:
+        initial_data = {'subject': subject, 'status': student.status}
+        form = StudentEnrollmentForm(initial=initial_data)
+
+    context = {
+        'form': form,
+        'subject': subject,
+        'student': student
+    }
+    return render(request, 'edit_status.html', context)
