@@ -7,6 +7,7 @@ from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnr
 from django.forms import modelformset_factory
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -406,6 +407,22 @@ def subject_details(request, subject_id):
     return render(request, 'subject_details.html', context)
 
 
+# @login_required
+# @user_passes_test(check_student)
+# def upisni_list(request):
+#     student = request.user
+#     enrolled_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.ENROLLED.value)
+#     passed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value)
+#     failed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.FAILED.value)
+
+#     context = {
+#         'enrolled_subjects': enrolled_subjects,
+#         'passed_subjects': passed_subjects,
+#         'failed_subjects': failed_subjects
+#     }
+
+#     return render(request, 'upisni_list.html', context)
+
 @login_required
 @user_passes_test(check_student)
 def upisni_list(request):
@@ -414,10 +431,13 @@ def upisni_list(request):
     passed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value)
     failed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.FAILED.value)
 
+    passed_ects_total = passed_subjects.aggregate(total_ects=Sum('ects')).get('total_ects') or 0
+
     context = {
         'enrolled_subjects': enrolled_subjects,
         'passed_subjects': passed_subjects,
-        'failed_subjects': failed_subjects
+        'failed_subjects': failed_subjects,
+        'passed_ects_total': passed_ects_total
     }
 
     return render(request, 'upisni_list.html', context)
@@ -501,3 +521,8 @@ def enroll_subject(request, subject_id):
         return redirect('unenrolled_subjects')
 
     return render(request, 'enroll_subject.html', {'subject': subject})
+
+
+def professor_list_new(request):
+    professors = Korisnici.get_professors()
+    return render(request, 'professor_list_new.html', {'professors': professors})
