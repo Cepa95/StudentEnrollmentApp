@@ -12,16 +12,21 @@
   <body>
     <nav>
       <div class="nav-left">
-        <a href="{% url 'success' %}">HOME</a>
-        <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
-        <a href="{% url 'add_user' %}" >ADD USER</a>
-        <a href="{% url 'create_enrollment' %}" class="current"> ENROLL</a>
+          <a href="{% url 'success' %}" >HOME</a>
+          <a href="{% url 'add_subject' %}">ADD SUBJECT</a>
+          <a href="{% url 'add_user' %}">ADD USER</a>
+          <a href="{% url 'create_enrollment' %}" class="current">ENROLL</a>
+          <a href="{% url 'user_list' %}">REMOVE USER</a>
       </div>
       <div class="nav-right">
-        <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+          {% csrf_token %}
+          <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
       </div>
-    </nav>
-    <h2>Add User</h2>
+  </nav>
+  <br>
+  <br>
+  <br>
+  <br>
     <table>
       <form method="post" action="{% url 'create_enrollment' %}">
         {% csrf_token %}

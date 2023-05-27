@@ -8,7 +8,7 @@
         table, th, tr, td {
             border: 1px solid
             }
-        </style>
+    </style>
 
 
 </head>
@@ -38,7 +38,9 @@
                 <td>{{ subject.name }}</td>
                 <td>Enrolled</td>
                 <td> {{ subject.ects }}</td>
+            
             </tr>
+            
         {% empty %}
             <tr>
                 <td colspan="2">No enrolled subjects.</td>

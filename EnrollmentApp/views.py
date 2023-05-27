@@ -245,6 +245,46 @@ def popis_studenata(request, predmet_id):
     return render(request, 'popis_studenata.html', {'predmet': predmet, 'enrollments': enrollments})
 
 
+
+@login_required
+@user_passes_test(check_admin)
+def remove_subjects_students(request, subject_id):
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    enrollments = StudentEnrollment.objects.filter(subject=subject)
+
+    if request.method == 'POST':
+        enrollment_id = request.POST.get('enrollment_id')
+        enrollment = get_object_or_404(StudentEnrollment, id=enrollment_id)
+        enrollment.delete()
+        return redirect('popis_studenata', predmet_id=subject_id)
+
+    context = {'predmet': subject, 'enrollments': enrollments}
+    return render(request, 'popis_studenata_admin.html', context)
+
+
+@login_required
+@user_passes_test(check_admin)
+def user_list(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user = Korisnici.objects.get(id=user_id)
+        user.delete()
+        return redirect('user_list')
+
+    users = Korisnici.objects.exclude(role=Korisnici.RoleChoices.ADMINISTRATOR.value).order_by('status')
+    return render(request, 'user_list.html', {'users': users})
+
+
+@login_required
+@user_passes_test(check_admin)
+def remove_user(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user = Korisnici.objects.get(id=user_id)
+        user.delete()
+    return redirect('user_list')
+
+
 @login_required
 @user_passes_test(check_professor)
 def professor_subjects(request):
