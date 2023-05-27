@@ -20,7 +20,8 @@ from EnrollmentApp.views import add_user, logout_view, success_login, add_subjec
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student, professor_list, edit_professor
 from EnrollmentApp.views import create_enrollment,enrollment_list, popis_studenata, professor_subjects
 from EnrollmentApp.views import subject_student_list, edit_status, remove_subject_student, forbidden, subject_passed_students, subject_enrolled_students
-from EnrollmentApp.views import subject_failed_students, subject_details, upisni_list, enrolled_student, _remove_subject_student
+from EnrollmentApp.views import subject_failed_students, subject_details, upisni_list, enrolled_student, remove_subject_students
+from EnrollmentApp.views import unenrolled_subjects, enroll_subject
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -59,7 +60,9 @@ urlpatterns = [
     path('subject/details/<int:subject_id>/', subject_details, name='subject_details'),
     path('upisni_list/', upisni_list, name='upisni_list'),
     path('enrolled_student/', enrolled_student, name='enrolled_student'),
-    path('subject/remove_subject_student/<int:subject_id>/', _remove_subject_student, name='remove_subject_student'),
+    path('subject/remove_subject_students/<int:subject_id>/', remove_subject_students, name='remove_subject_student'),
+    path('unenrolled_subjects/', unenrolled_subjects, name='unenrolled_subjects'),
+    path('enroll_subject/<int:subject_id>/', enroll_subject, name='enroll_subject'),
 
 
 

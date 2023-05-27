@@ -25,5 +25,9 @@
       {% csrf_token %}
       <input type="submit" value="list all enrolled subjects" style="width: 200px">
     </form> 
+    <form action="{% url 'unenrolled_subjects' %}" method="post" >
+      {% csrf_token %}
+      <input type="submit" value="list all unenrolled subjects" style="width: 200px">
+    </form> 
 </body>
 </html>

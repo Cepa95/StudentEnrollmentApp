@@ -435,12 +435,9 @@ def enrolled_student(request):
     return render(request, 'enrolled_student.html', context)
 
 
-
-
-
 @login_required
 @user_passes_test(check_student)
-def _remove_subject_student(request, subject_id):
+def remove_subject_students(request, subject_id):
     student = request.user
     subject = get_object_or_404(Predmeti, id=subject_id)
     enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
@@ -454,3 +451,53 @@ def _remove_subject_student(request, subject_id):
         return render(request, 'remove_subject_student.html', context)
 
     return redirect('forbidden')
+
+
+
+@login_required
+@user_passes_test(check_student)
+def unenrolled_subjects(request):
+    student = request.user
+    all_subjects = Predmeti.objects.exclude(studentenrollment__student=student).order_by('semester')
+
+    context = {
+        'all_subjects': all_subjects
+    }
+    return render(request, 'unenrolled_subjects.html', context)
+
+
+
+@login_required
+@user_passes_test(check_student)
+def unenrolled_subjects(request):
+    student = request.user
+    student_status = student.status
+
+    if student_status == 'redovan':
+        context = {
+            'student': student,
+            'student_status': student_status,
+            'all_subjects': Predmeti.objects.exclude(studentenrollment__student=student).order_by('sem_red')
+        }
+    else:
+        context = {
+            'student': student,
+            'student_status': student_status,
+            'all_subjects': Predmeti.objects.exclude(studentenrollment__student=student).order_by('sem_izv')
+        }
+
+    return render(request, 'unenrolled_subjects.html', context)
+
+
+@login_required
+@user_passes_test(check_student)
+def enroll_subject(request, subject_id):
+    student = request.user
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    
+    if request.method == 'POST':
+        enrollment = StudentEnrollment.objects.create(student=student, subject=subject, status=StudentEnrollment.StatusChoices.ENROLLED.value)
+        enrollment.save()
+        return redirect('unenrolled_subjects')
+
+    return render(request, 'enroll_subject.html', {'subject': subject})
