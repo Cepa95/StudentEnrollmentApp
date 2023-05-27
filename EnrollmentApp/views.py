@@ -19,6 +19,9 @@ def check_professor(user):
      return user.role == 'profesor'
 
 
+def check_student(user):
+     return user.role == 'student'
+
 @login_required
 @user_passes_test(check_admin)
 def add_user(request):
@@ -401,3 +404,20 @@ def subject_details(request, subject_id):
     }
 
     return render(request, 'subject_details.html', context)
+
+
+@login_required
+@user_passes_test(check_student)
+def upisni_list(request):
+    student = request.user
+    enrolled_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.ENROLLED.value)
+    passed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value)
+    failed_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.FAILED.value)
+
+    context = {
+        'enrolled_subjects': enrolled_subjects,
+        'passed_subjects': passed_subjects,
+        'failed_subjects': failed_subjects
+    }
+
+    return render(request, 'upisni_list.html', context)

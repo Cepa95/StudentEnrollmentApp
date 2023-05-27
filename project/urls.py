@@ -20,7 +20,7 @@ from EnrollmentApp.views import add_user, logout_view, success_login, add_subjec
 from EnrollmentApp.views import lista_predmeta, promjena_predmeta, student_list, edit_student, professor_list, edit_professor
 from EnrollmentApp.views import create_enrollment,enrollment_list, popis_studenata, professor_subjects
 from EnrollmentApp.views import subject_student_list, edit_status, remove_subject_student, forbidden, subject_passed_students, subject_enrolled_students
-from EnrollmentApp.views import subject_failed_students, subject_details
+from EnrollmentApp.views import subject_failed_students, subject_details, upisni_list
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -57,6 +57,7 @@ urlpatterns = [
     path('subject/enrolled_students/<int:subject_id>/', subject_enrolled_students, name='subject_enrolled_students'),
     path('subject/failed_students/<int:subject_id>/', subject_failed_students, name='subject_failed_students'),
     path('subject/details/<int:subject_id>/', subject_details, name='subject_details'),
+    path('upisni_list/', upisni_list, name='upisni_list'),
 
 
 

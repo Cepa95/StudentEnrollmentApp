@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enrollement list</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+          <a href="{% url 'success' %}" >HOME</a>
+          <a href="{% url 'upisni_list' %}" class="current" >ENROLLMENT LIST</a>
+        </div>
+        <div class="nav-right">
+          {% csrf_token %}
+          <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <h1>Enrollment list</h1>
+    <table>
+        <tr>
+            <th>Subject Name</th>
+            <th>Status</th>
+        </tr>
+        {% for subject in enrolled_subjects %}
+            <tr>
+                <td>{{ subject.name }}</td>
+                <td>Enrolled</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">No enrolled subjects.</td>
+            </tr>
+        {% endfor %}
+        {% for subject in passed_subjects %}
+            <tr>
+                <td>{{ subject.name }}</td>
+                <td>Passed</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">No passed subjects.</td>
+            </tr>
+        {% endfor %}
+        {% for subject in failed_subjects %}
+            <tr>
+                <td>{{ subject.name }}</td>
+                <td>Failed</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">No failed subjects.</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
