@@ -1,28 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Remove student</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+  <body>
     <nav>
-        <div class="nav-left">
-            <a href="{% url 'success' %}">HOME</a>
-            <a href="{% url 'professor_subjects' %}">SUBJECTS</a>
-        </div>
-        <div class="nav-right">
-            <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
-        </div>
+      <div class="nav-left">
+        <a href="{% url 'success' %}">HOME</a>
+        <a href="javascript:history.back()" >RETURN</a> 
+      </div>
+      <div class="nav-right">
+        <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+      </div>
     </nav>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <h2>Confirm Removal</h2>
-    <p>Are you sure you want to remove the {{ student.first_name }} {{ student.last_name }} from {{ subject.name }} </p>
+    {% if student.first_name %}
+    <p>
+      Are you sure you want to remove {{ student.first_name }} {{student.last_name }} from {{ subject.name }}?
+    </p>
+    {% else %}
+    <p>Do you want to unsubscribe from {{ subject.name }}?</p>
+    {% endif %}
     <form method="POST">
-        {% csrf_token %}
-        <input type="submit" value="remove">
+      {% csrf_token %}
+      <input type="submit" value="remove" />
     </form>
-</body>
+  </body>
 </html>

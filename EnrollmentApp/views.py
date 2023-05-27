@@ -421,3 +421,36 @@ def upisni_list(request):
     }
 
     return render(request, 'upisni_list.html', context)
+
+
+@login_required
+@user_passes_test(check_student)
+def enrolled_student(request):
+    student = request.user
+    enrolled_subjects = Predmeti.objects.filter(studentenrollment__student=student, studentenrollment__status=StudentEnrollment.StatusChoices.ENROLLED.value)
+
+    context = {
+        'enrolled_subjects': enrolled_subjects
+    }
+    return render(request, 'enrolled_student.html', context)
+
+
+
+
+
+@login_required
+@user_passes_test(check_student)
+def _remove_subject_student(request, subject_id):
+    student = request.user
+    subject = get_object_or_404(Predmeti, id=subject_id)
+    enrollment = get_object_or_404(StudentEnrollment, student=student, subject=subject)
+
+    if enrollment.status == StudentEnrollment.StatusChoices.ENROLLED.value:
+        if request.method == 'POST':
+            enrollment.delete()
+            return redirect('enrolled_student')
+
+        context = {'subject': subject}
+        return render(request, 'remove_subject_student.html', context)
+
+    return redirect('forbidden')
