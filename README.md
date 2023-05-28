@@ -1,6 +1,8 @@
 # StudentEnrollmentApp
 
-
+OSS Split  
+Marina Rodić, viši predavač  
+Godina 2022./2023.  
 
 
 Some functionalities:  
