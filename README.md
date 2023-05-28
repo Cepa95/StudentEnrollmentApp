@@ -3,11 +3,15 @@
 
 
 
+Some functionalities:  
 ![cover](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c69efcea-1546-4ab9-9906-e2d61e6ed312)
 ![login](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/1d8e8418-d379-4b5c-8b54-c191a1cd1c69)
 ![admin](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/385b8c6e-b4c6-45c0-aa07-3e5523160508)
 ![add](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fea61767-444d-4f09-a9ee-62762b9cf44b)
+![remove](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/e3bf285b-68f4-488c-a67f-9fc96023f82c)
+![subjects](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/9e51d289-3cd0-44e0-8bf9-54c51e423618)
 ![professor](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fddad0ea-eb06-436f-8b11-a997ecfb72c5)
+![students](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/3ead5abe-6383-4574-8bf7-ec8d761314c9)
 ![user](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c80bc8b1-74e3-4d29-a980-a4ded69eb9b4)
 
 
