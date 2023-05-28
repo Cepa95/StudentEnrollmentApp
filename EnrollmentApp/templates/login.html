@@ -17,32 +17,18 @@
       </div>
     </nav>
     <br />
-    <br />
-    <br />
-    <table>
-      <tr>
-        <th colspan="2"></th>
-      </tr>
-      <tr>
-        <td>
-          <form method="post">
-            {% csrf_token %}
-            <tr>
-              <td>{{ form.username.label_tag }}</td>
-              <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-              <td>{{ form.password.label_tag }}</td>
-              <td>{{ form.password }}</td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="submit" value="login" />
-              </td>
-            </tr>
-          </form>
-        </td>
-      </tr>
-    </table>
+   
+    <div class="form-container">
+      <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+        <br />
+        <label for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+        <br />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
   </body>
 </html>
