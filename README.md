@@ -1,6 +1,6 @@
 # StudentEnrollmentApp
 
-Zadatak za projekt
+Zadatak za projekt  
 Izraditi sustav za upis studenata. Sustav ce se sastojati od tri uloge: student, profesor i administrator.
 
 Uloga administrator:
@@ -33,12 +33,7 @@ Uloga student:
 Sve promjene u bazi vršiti preko POST zahtjeva. Obratiti pažnju na sigurnost aplikacije (kriptiranje lozinki, SQL injection i XSS). Strukturu baze koja je na slici nize treba prilagoditi potrebama ovog zadatka. Potrebno je dodati novu tablicu „uloge” u kojoj ce se
 definirati uloge „admin”, „profesor” i „student” (u tablici korisnici izmijeniti stupac „uloga” iz
 „enum” tipa podatka i napraviti relaciju na tablicu „uloge”). Tablica „korisnici” se razlikuje od Django-ve tablice User. Potrebno ju je prilagoditi (vidi predavanja). Takodjer je potrebno prosiriti tablicu „predmeti” sa stupcem koji definira nositelja kolegija. Taj stupac ce biti strani kljuc, a vezat ce se na tablicu korisnici. Na aplikacijskoj razini je nuzno voditi racuna kako se za nositelja kolegija moze postaviti samo korisnik koji ima ulogu profesor.
-
-
-
-
-
-
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/b8b46479-dbd6-4915-b644-9754f8d25f38)
 
 
 
@@ -47,15 +42,15 @@ upisanih/položenih predmeta podijeljenih po semestrima (ovisno o statusu studen
 Funkcionalnosti i sigurnost su glavne stavke, ali u ocjenu će ulaziti i upotrebljivost sučelja i organizacija kôda.
 
 Primjer izgleda sucelja:
-
- 
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/ea561ddd-32f3-4edc-802c-15fec8f32387)  
 Slika 1 Odabir studenata sa liste (za mentore). Link za svakog studenta vodi na njegov upisni list.
 
- 
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/8cbf8dba-75b6-48e3-b550-4fc83511732e)   
 Slika 2 Pregled predmeta (za mentore). Linkovi omogućuju pregled i editiranje podataka o predmetu.
 
- 
+ ![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/829b070c-475e-4c5a-8007-66aa3470b8b1)
+
 Slika 3 Upisni list (pogled mentora za redovnog studenta) za studenta red@oss.hr. Dugmad omogućuju promjenu upisa (upiši/ispiši/položeno).
 
-Pravila.
+Pravila.  
 Obrana projekta se održava u sklopu ispita. Sastojati će se od pismenog ispita, u vidu jednog ili više zadataka (npr. dodati linkove koji vode na opise predmeta uz prikaz liste predmeta i sl.) kojeg je potrebno odraditi u zadanom vremenskom roku. Nakon pismenog ispita organizirati će se usmeni ispit. Na usmenom ispitu će svaki student prezentirati svoj projekt, te će trebati odgovarati na pitanja vezana uz kôd u projektu. Primjerice - pokazati kroz kôd kako se upiše novi predmet. Projekt je potrebno predati najkasnije tri radna dana prije planiranog ispitnog roka (ako je ispit u utorak-projekt je potrebno predati najkasnije do cetvrtka do 23.59 sati ili ako je ispit u petak projekt je potrebno predati najkasnije do utorka do 23.59 sati). Zakašnjeli projekti se automatizmom prebacuju na idući ispitni rok.
