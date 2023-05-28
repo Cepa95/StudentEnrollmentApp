@@ -37,13 +37,10 @@ class StudentEnrollmentForm1(forms.ModelForm):
         self.fields['student'].queryset = Korisnici.objects.filter(role='student')
 
 
-
 class StudentEnrollmentForm(forms.ModelForm):
     class Meta:
         model = StudentEnrollment
         fields = ['subject', 'status']
-
-
 
 
 class StudentEnrollmentForm2(forms.ModelForm):

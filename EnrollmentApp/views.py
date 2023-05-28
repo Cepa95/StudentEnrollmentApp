@@ -2,15 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Korisnici, Predmeti, StudentEnrollment
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout
-from django.urls import reverse
 from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnrollmentForm1, StudentEnrollmentForm2
-from django.forms import modelformset_factory
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
 from django.db.models import Sum
-
 # Create your views here.
-
 
 def check_admin(user):
     return user.role == 'administrator'
@@ -47,7 +43,6 @@ def add_user(request):
         return redirect('/success/')
 
     return render(request, 'add_user.html')
-
 
 
 @login_required
@@ -150,7 +145,6 @@ def edit_student(request, student_id):
 #         formset = EnrollmentFormSet(initial=initial_data)
 #     return render(request, 'enrollment_list.html', {'student': student, 'formset': formset})
 
-
 @login_required
 @user_passes_test(check_admin)
 def enrollment_list(request, student_id):
@@ -179,7 +173,6 @@ def enrollment_list(request, student_id):
         'formset': formset
     }
     return render(request, 'enrollment_list.html', context)
-
 
 
 @login_required
@@ -295,7 +288,6 @@ def professor_subjects(request):
     return render(request, 'professor_subject.html', context)
 
 
-
 @login_required
 @user_passes_test(check_professor)
 def subject_student_list(request, subject_id):
@@ -307,7 +299,6 @@ def subject_student_list(request, subject_id):
         'students': students
     }
     return render(request, 'subject_student_list.html', context)
-
 
 
 # @login_required
@@ -391,7 +382,6 @@ def forbidden(request):
     return render(request, 'forbidden.html')
 
 
-
 @login_required
 @user_passes_test(check_professor)
 def subject_passed_students(request, subject_id):
@@ -432,7 +422,6 @@ def subject_failed_students(request, subject_id):
     }
 
     return render(request, 'subject_failed_students.html', context)
-
 
 
 @login_required
@@ -513,7 +502,6 @@ def remove_subject_students(request, subject_id):
     return redirect('forbidden')
 
 
-
 @login_required
 @user_passes_test(check_student)
 def unenrolled_subjects(request):
@@ -524,7 +512,6 @@ def unenrolled_subjects(request):
         'all_subjects': all_subjects
     }
     return render(request, 'unenrolled_subjects.html', context)
-
 
 
 @login_required

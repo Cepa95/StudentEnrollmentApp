@@ -42,7 +42,6 @@ class Korisnici(AbstractUser):
     
 
 
-
 class Predmeti(models.Model):
     IZBORNI = (('da', 'da'), ('ne', 'ne'))
     name = models.CharField(max_length=50)
