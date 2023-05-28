@@ -1,5 +1,25 @@
 # StudentEnrollmentApp
 
+
+
+
+![cover](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c69efcea-1546-4ab9-9906-e2d61e6ed312)
+![login](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/1d8e8418-d379-4b5c-8b54-c191a1cd1c69)
+![admin](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/385b8c6e-b4c6-45c0-aa07-3e5523160508)
+![add](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fea61767-444d-4f09-a9ee-62762b9cf44b)
+![professor](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fddad0ea-eb06-436f-8b11-a997ecfb72c5)
+![user](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c80bc8b1-74e3-4d29-a980-a4ded69eb9b4)
+
+
+
+
+
+
+
+
+
+
+
 Zadatak za projekt  
 Izraditi sustav za upis studenata. Sustav ce se sastojati od tri uloge: student, profesor i administrator.
 
