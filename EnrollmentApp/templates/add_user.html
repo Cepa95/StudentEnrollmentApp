@@ -20,12 +20,11 @@
         </div>
     </nav>
     <br>
-    <br>
-    <br>
-    <h2>Add User</h2>
+
     {% if error_message %}
         <p>{{ error_message }}</p>
     {% endif %}
+    <div class="form-container">
     <form method="post" action="{% url 'add_user' %}">
         {% csrf_token %}
         <table>
@@ -72,13 +71,10 @@
                         <option value="izvanredan">Izvanredan</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit">
-                </td>
-            </tr>
+            </tr>   
         </table>
+        <input type="submit" value="Submit">
     </form>
+    </div>
 </body>
 </html>

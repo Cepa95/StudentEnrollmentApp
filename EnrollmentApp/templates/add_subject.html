@@ -12,32 +12,31 @@
   <body>
     <nav>
       <div class="nav-left">
-          <a href="{% url 'success' %}" >HOME</a>
-          <a href="{% url 'add_subject' %}" class="current">ADD SUBJECT</a>
-          <a href="{% url 'add_user' %}">ADD USER</a>
-          <a href="{% url 'create_enrollment' %}">ENROLL</a>
-          <a href="{% url 'user_list' %}">REMOVE USER</a>
+        <a href="{% url 'success' %}">HOME</a>
+        <a href="{% url 'add_subject' %}" class="current">ADD SUBJECT</a>
+        <a href="{% url 'add_user' %}">ADD USER</a>
+        <a href="{% url 'create_enrollment' %}">ENROLL</a>
+        <a href="{% url 'user_list' %}">REMOVE USER</a>
       </div>
       <div class="nav-right">
-          {% csrf_token %}
-          <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
+        {% csrf_token %}
+        <a href="{% url 'logout' %}" class="logout">LOGOUT</a>
       </div>
-  </nav>
-  <br>
-  <br>
-  <br>
-    <h2>Add Subject</h2>
-    <form method="POST">
-      {% csrf_token %}
-      <table>
-        {% for field in form %}
-        <tr>
-          <td>{{ field.label_tag }}</td>
-          <td>{{ field }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      <input type="submit" value="Submit" />
-    </form>
+    </nav>
+    <br />
+    <div class="form-container">
+      <form method="POST">
+        {% csrf_token %}
+        <table>
+          {% for field in form %}
+          <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   </body>
 </html>

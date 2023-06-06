@@ -25,8 +25,7 @@
   </nav>
   <br>
   <br>
-  <br>
-  <br>
+  <div class="form-container">
     <table>
       <form method="post" action="{% url 'create_enrollment' %}">
         {% csrf_token %}
@@ -49,11 +48,12 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td colspan="4">
             <input type="submit" value="Create Enrollment">
           </td>
         </tr>
       </form>
     </table>
+    </div>
   </body>
 </html>
