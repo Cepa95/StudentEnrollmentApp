@@ -5,20 +5,20 @@ Marina Rodić, viši predavač
 Godina 2022./2023.  
 
 
-Some functionalities:  
-![cover](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c69efcea-1546-4ab9-9906-e2d61e6ed312)
-![login](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/1d8e8418-d379-4b5c-8b54-c191a1cd1c69)
-![admin](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/385b8c6e-b4c6-45c0-aa07-3e5523160508)
-![add](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fea61767-444d-4f09-a9ee-62762b9cf44b)
-![remove](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/e3bf285b-68f4-488c-a67f-9fc96023f82c)
-![subjects](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/9e51d289-3cd0-44e0-8bf9-54c51e423618)
-![professor](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/fddad0ea-eb06-436f-8b11-a997ecfb72c5)
-![students](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/3ead5abe-6383-4574-8bf7-ec8d761314c9)
-![user](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c80bc8b1-74e3-4d29-a980-a4ded69eb9b4)
-
-
-
-
+Some functionalities:    
+![cover](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/069617d9-833b-43f0-96d3-62d342bcad59)
+![login](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/cf2b3f67-6ccf-43a7-8ee8-60cf70a95e33)
+![home](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c5852faa-094e-4541-86a1-afd5e5d883b5)
+![add subject](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/f401ca9e-3dbe-434d-9193-160b593ba27b)
+![add user](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/333a60c6-ac67-46e7-b200-c390dbe2edcc)
+![subjects](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/30dad6e1-2b6c-43d0-8c4a-dc693eae6cdd)
+![students](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/a1f796d1-9874-4bca-8d0b-0fc8aeab392f)
+![enrollment list](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/698900c5-5c3a-46ca-afb8-1973a56d5d1b)
+![remove user](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/43873fef-35d1-4c36-a5a3-a87684e9227b)
+![student list](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/35d85372-202e-48ce-b290-b1aa4ea9de3d)
+![enrolled subjects](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/7d6a6ca7-56b7-4690-b14b-5a4674b5ab3f)
+![remove](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/e402fa0e-45fb-4874-bd7b-7cd0d6211294)
+![enroll](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/61b84a4d-1476-4e69-a94f-3597844aab39)
 
 
 
