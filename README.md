@@ -59,7 +59,7 @@ Uloga student:
 Sve promjene u bazi vršiti preko POST zahtjeva. Obratiti pažnju na sigurnost aplikacije (kriptiranje lozinki, SQL injection i XSS). Strukturu baze koja je na slici nize treba prilagoditi potrebama ovog zadatka. Potrebno je dodati novu tablicu „uloge” u kojoj ce se
 definirati uloge „admin”, „profesor” i „student” (u tablici korisnici izmijeniti stupac „uloga” iz
 „enum” tipa podatka i napraviti relaciju na tablicu „uloge”). Tablica „korisnici” se razlikuje od Django-ve tablice User. Potrebno ju je prilagoditi (vidi predavanja). Takodjer je potrebno prosiriti tablicu „predmeti” sa stupcem koji definira nositelja kolegija. Taj stupac ce biti strani kljuc, a vezat ce se na tablicu korisnici. Na aplikacijskoj razini je nuzno voditi racuna kako se za nositelja kolegija moze postaviti samo korisnik koji ima ulogu profesor.
-![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/b8b46479-dbd6-4915-b644-9754f8d25f38)
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/b2e2420e-4fb6-40e6-8ab4-e9f16ba1c3d9)  
 
 
 
@@ -68,14 +68,13 @@ upisanih/položenih predmeta podijeljenih po semestrima (ovisno o statusu studen
 Funkcionalnosti i sigurnost su glavne stavke, ali u ocjenu će ulaziti i upotrebljivost sučelja i organizacija kôda.
 
 Primjer izgleda sucelja:
-![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/ea561ddd-32f3-4edc-802c-15fec8f32387)  
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/c469f4a8-4719-4269-8a62-73ed0ffeb648)  
 Slika 1 Odabir studenata sa liste (za mentore). Link za svakog studenta vodi na njegov upisni list.
 
-![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/8cbf8dba-75b6-48e3-b550-4fc83511732e)   
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/8ceb146e-d675-40f6-a964-c85dc9468165)  
 Slika 2 Pregled predmeta (za mentore). Linkovi omogućuju pregled i editiranje podataka o predmetu.
 
- ![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/829b070c-475e-4c5a-8007-66aa3470b8b1)
-
+![image](https://github.com/Cepa95/StudentEnrollmentApp/assets/124800316/4b60fdd8-5526-473d-a8cf-04dd15b27c9d)  
 Slika 3 Upisni list (pogled mentora za redovnog studenta) za studenta red@oss.hr. Dugmad omogućuju promjenu upisa (upiši/ispiši/položeno).
 
 Pravila.  
