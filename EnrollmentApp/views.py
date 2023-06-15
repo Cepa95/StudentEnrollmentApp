@@ -555,18 +555,20 @@ def professor_list_new(request):
     return render(request, 'professor_list_new.html', {'professors': professors})
 
 
-
+@login_required
+@user_passes_test(check_admin)
 def subject_list(request):
     subjects = Predmeti.objects.all()
     subject_data = []
 
     for subject in subjects:
+        subject_id = subject.id
         passed_students = StudentEnrollment.objects.filter(subject=subject, status=StudentEnrollment.StatusChoices.PASSED.value)
         regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.REDOVAN.value)
         non_regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
 
         subject_info = {
-            'subject_id': subject,
+            'subject_id': subject_id,
             'subject': subject,
             'total_passed': passed_students.count(),
             'regular_passed': regular_students.count(),
@@ -578,11 +580,12 @@ def subject_list(request):
     return render(request, 'subject_list.html', {'subject_data': subject_data})
 
 
-
+@login_required
+@user_passes_test(check_admin)
 def passed_subject_details(request, subject_id):
     subject = Predmeti.objects.get(id=subject_id)
     passed_students = StudentEnrollment.objects.filter(subject=subject, status=StudentEnrollment.StatusChoices.PASSED.value)
     regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.REDOVAN.value)
-    external_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
+    non_regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
     
-    return render(request, 'passed_subject_details.html', {'subject': subject, 'regular_students': regular_students, 'external_students': external_students})
+    return render(request, 'passed_subject_details.html', {'subject': subject, 'regular_students': regular_students, 'non_regular_students': non_regular_students})

@@ -26,7 +26,8 @@
     <h2>Subject List</h2>
     <ul>
         {% for subject_info in subject_data %}
-            <li><strong>{{ subject_info.subject.name }}</strong> | Položeno: {{ subject_info.total_passed }} | Redovnih: {{ subject_info.regular_passed }} | Izvanrednih: {{ subject_info.non_regular_passed }} <a href="{% url 'passed_subject_details' subject_info.id %}">Details</a></li>
+            <li><strong>{{ subject_info.subject.name }}</strong> | Položeno: {{ subject_info.total_passed }} | Redovnih: {{ subject_info.regular_passed }} | Izvanrednih: {{ subject_info.non_regular_passed }} <a href="{% url 'passed_subject_details' subject_info.subject_id %}" class="list"> <span class="space"></span>Details</a>
+            </li>
             <hr>
         {% endfor %}
     </ul>
