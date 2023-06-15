@@ -553,3 +553,36 @@ def enroll_subject(request, subject_id):
 def professor_list_new(request):
     professors = Korisnici.get_professors()
     return render(request, 'professor_list_new.html', {'professors': professors})
+
+
+
+def subject_list(request):
+    subjects = Predmeti.objects.all()
+    subject_data = []
+
+    for subject in subjects:
+        passed_students = StudentEnrollment.objects.filter(subject=subject, status=StudentEnrollment.StatusChoices.PASSED.value)
+        regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.REDOVAN.value)
+        non_regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
+
+        subject_info = {
+            'subject_id': subject,
+            'subject': subject,
+            'total_passed': passed_students.count(),
+            'regular_passed': regular_students.count(),
+            'non_regular_passed': non_regular_students.count()
+        }
+
+        subject_data.append(subject_info)
+
+    return render(request, 'subject_list.html', {'subject_data': subject_data})
+
+
+
+def passed_subject_details(request, subject_id):
+    subject = Predmeti.objects.get(id=subject_id)
+    passed_students = StudentEnrollment.objects.filter(subject=subject, status=StudentEnrollment.StatusChoices.PASSED.value)
+    regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.REDOVAN.value)
+    external_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
+    
+    return render(request, 'passed_subject_details.html', {'subject': subject, 'regular_students': regular_students, 'external_students': external_students})

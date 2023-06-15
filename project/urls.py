@@ -61,5 +61,8 @@ urlpatterns = [
     path('remove_subjects_students/<int:subject_id>/', views.remove_subjects_students, name='remove_subjects_students'),
     path('users/', views.user_list, name='user_list'),
     path('remove_user/', views.remove_user, name='remove_user'),
+    path('subject_list/', views.subject_list, name='subject_list'),
+   path('subject_list/<int:subject_id>/', views.passed_subject_details, name='passed_subject_details'),
+
 
 ]  
