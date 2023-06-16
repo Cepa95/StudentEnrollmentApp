@@ -6,6 +6,8 @@ from .forms import PredmetForm, KorisniciForm, StudentEnrollmentForm, StudentEnr
 from django.forms import formset_factory
 from django.middleware.csrf import rotate_token
 from django.db.models import Sum
+from django.http import HttpResponse
+from django.db.models import Q, Count
 # Create your views here.
 
 def check_admin(user):
@@ -589,3 +591,89 @@ def passed_subject_details(request, subject_id):
     non_regular_students = passed_students.filter(student__status=Korisnici.StatusChoices.IZVANREDAN.value)
     
     return render(request, 'passed_subject_details.html', {'subject': subject, 'regular_students': regular_students, 'non_regular_students': non_regular_students})
+
+
+
+@login_required
+@user_passes_test(check_student)
+def enrollment_success(request):
+    return render(request, 'enrollment_success.html')
+
+@login_required
+@user_passes_test(check_student)
+def enable_enrollment(request):
+    if request.method == 'POST':
+        student_id = request.POST.get('student_id')
+        subject_id = request.POST.get('subject_id')
+
+        student = Korisnici.objects.get(id=student_id)
+        subject = Predmeti.objects.get(id=subject_id)
+
+        if student.status == Korisnici.StatusChoices.REDOVAN.value:
+            if subject.sem_red == 3:
+                first_year_subjects = Predmeti.objects.filter(sem_red=1)
+                passed_first_year_subjects = StudentEnrollment.objects.filter(
+                    student=student,
+                    subject__in=first_year_subjects,
+                    status=StudentEnrollment.StatusChoices.PASSED.value
+                )
+                
+                if passed_first_year_subjects.count() != first_year_subjects.count():
+                    return HttpResponse("Ne možete upisati treću godinu")
+
+        else:
+            if subject.sem_izv == 4:
+                first_year_subjects = Predmeti.objects.filter(sem_red=1)
+                second_year_subjects = Predmeti.objects.filter(sem_izv=2)
+                passed_second_year_subjects = StudentEnrollment.objects.filter(
+                    student=student,
+                    subject__in=second_year_subjects,
+                    status=StudentEnrollment.StatusChoices.PASSED.value
+                )
+
+                passed_first_year_subjects = StudentEnrollment.objects.filter(
+                    student=student,
+                    subject__in=first_year_subjects,
+                    status=StudentEnrollment.StatusChoices.PASSED.value
+                )
+                
+                if passed_second_year_subjects.count() != second_year_subjects.count():
+                    return HttpResponse("Ne možete upisati četvrtu godinu")
+                
+                elif passed_first_year_subjects.count() != first_year_subjects.count():
+                    return HttpResponse("Ne možete upisati četvrtu godinu")
+
+        if StudentEnrollment.objects.filter(student=student, subject=subject).exists():
+            return HttpResponse("Već ste upisani u ovaj predmet.")
+
+        enrollment = StudentEnrollment(student=student, subject=subject, status=StudentEnrollment.StatusChoices.ENROLLED.value)
+        enrollment.save()
+
+        return redirect('enrollment_success')
+    else:
+        student = request.user
+
+        if student.status == Korisnici.StatusChoices.REDOVAN.value:
+            subjects = Predmeti.objects.filter(sem_red=3)
+        else:
+            subjects = Predmeti.objects.filter(sem_izv=4)
+
+        return render(request, 'enable_enrollment.html', {'subjects': subjects})
+
+
+def get_final_year_students(request):
+        final_year_students = 0
+        regular_students = Korisnici.objects.filter(status=Korisnici.StatusChoices.REDOVAN.value)
+        regular_students = regular_students.annotate(passed_subjects_count=Count('studentenrollment', filter=Q(studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value, studentenrollment__subject__sem_red=1)))
+        regular_students = regular_students.filter(passed_subjects_count=Predmeti.objects.filter(sem_red=1).count())
+        
+        non_regular_students = Korisnici.objects.filter(status=Korisnici.StatusChoices.IZVANREDAN.value)
+        non_regular_students = non_regular_students.annotate(passed_first_year_subjects_count=Count('studentenrollment', filter=Q(studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value, studentenrollment__subject__sem_red=1)))
+        non_regular_students = non_regular_students.annotate(passed_second_year_subjects_count=Count('studentenrollment', filter=Q(studentenrollment__status=StudentEnrollment.StatusChoices.PASSED.value, studentenrollment__subject__sem_izv=2)))
+        non_regular_students = non_regular_students.filter(passed_first_year_subjects_count=Predmeti.objects.filter(sem_red=1).count(), passed_second_year_subjects_count=Predmeti.objects.filter(sem_izv=2).count())
+        
+        final_year_students = regular_students.count() + non_regular_students.count()
+
+        return HttpResponse(f"Broj studenata na šestoj godini: {final_year_students}")
+
+   

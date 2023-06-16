@@ -62,7 +62,10 @@ urlpatterns = [
     path('users/', views.user_list, name='user_list'),
     path('remove_user/', views.remove_user, name='remove_user'),
     path('subject_list/', views.subject_list, name='subject_list'),
-   path('subject_list/<int:subject_id>/', views.passed_subject_details, name='passed_subject_details'),
-
+    path('subject_list/<int:subject_id>/', views.passed_subject_details, name='passed_subject_details'),
+    path('enable_enrollment/', views.enable_enrollment, name='enable_enrollment'),
+    path('enrollment_success/', views.enrollment_success, name='enrollment_success'),
+    path('final_year_students/', views.get_final_year_students, name='final_year_students'),
 
 ]  
+
